@@ -4,45 +4,23 @@ var app_data = {
 	palette: [
 		{
 			key : 1,
+			classname: 'swatch1',
 			hex : '#000000'
 		},
 		{
 			key : 2,
+			classname: 'swatch2',
 			hex : '#666666'
 		},
 		{
 			key : 3,
+			classname: 'swatch3',
 			hex : '#AAAAAA'
 		},
 		{
 			key : 4,
+			classname: 'swatch4',
 			hex : '#DDDDDD'
-		},
-	],
-	skins : [
-		{
-			key : 1,
-			styles: {
-				palette_id : 1
-			}
-		},
-		{
-			key : 2,
-			styles: {
-				palette_id : 2
-			}
-		},
-		{
-			key : 3,
-			styles: {
-				palette_id : 3
-			}
-		},
-		{
-			key : 4,
-			styles: {
-				palette_id : 4
-			}
 		},
 	],
 }
@@ -51,36 +29,22 @@ var app_data = {
 
 Vue.component('swatch', {
 	props: {
-		skin : {
+		swatch : {
 			type: Object,
 			required: true
 		},
-		palette : {
-			type: Array,
-			required: true
-		}
 	},
-	template: `<div>
-		<div class="app-control-header text-center p-4">
-			{{ skin.key }}
+	template: `<div class="ui-state-default">
+		<div class="text-center">
+			{{ swatch.classname }}
 		</div>
-		<div class="app-control-content">
-			<div class="swatch" :style="{ backgroundColor:  getColor(skin.styles.palette_id) }" style="height:100px;"></div>
-			<div class="text-box text-center">
-				<input class="border w-full" type="text" name="color_input_1" value="">
+		<div>
+			<div class="swatch" :style="{ backgroundColor:  swatch.hex }" style="height:100px;"></div>
+			<div class="text-center">
+				<input class="border w-full p-2" type="text" v-model="swatch.hex" value="">
 			</div>
 		</div>
-	</div>`,
-	methods: {
-		getColor: function(palette_id) {
-
-			var palette =  this.palette.filter(
-				function(data){ return data.key == palette_id }
-			);
-
-			return palette[0].hex;
-		}
-	}
+	</div>`
 });
 
 
@@ -88,4 +52,12 @@ Vue.component('swatch', {
 var app = new Vue({
 	el: '#app',
 	data: app_data
+});
+
+
+$(function(){
+
+	console.log($( "#palette" ));
+	$( "#palette" ).sortable();
+	$( "#palette" ).disableSelection();
 });
