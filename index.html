@@ -16,16 +16,11 @@
 		<div id="app" class="container mx-auto px-4 flex flex-col content-start justify-start h-full">
 			<form action="index.html" method="get">
 				<div class="app-controls flex flex-row content-center justify-between pt-4">
-					<div v-for="skin in skins" class="app-control">
-						<div class="app-control-header text-center p-4">
-							{{ skin.key }}
-						</div>
-						<div class="app-control-content">
-							<div class="swatch" :style="{ backgroundColor: palette[ skin.styles.palette_id -1 ].hex }" style="height:100px;"></div>
-							<div class="text-box text-center">
-								<input class="border w-full" type="text" name="color_input_1" value="">
-							</div>
-						</div>
+					<div
+						v-for="skin in skins" 
+						:key="skin.key" 
+						class="app-control">
+						<swatch :skin="skin" :palette="palette"></swatch>
 					</div>
 				</div>
 			</form>
