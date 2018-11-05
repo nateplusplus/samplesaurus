@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Samplesaurus</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	</head>
+	<body class="h-screen">
+		<div id="app" class="container mx-auto px-4 flex flex-col content-start justify-start h-full">
+			<form action="index.html" method="get">
+				<div class="app-controls flex flex-row content-center justify-between pt-4">
+					<div v-for="skin in skins" class="app-control">
+						<div class="app-control-header text-center p-4">
+							{{ skin.key }}
+						</div>
+						<div class="app-control-content">
+							<div class="swatch" :style="{ backgroundColor: palette[ skin.styles.palette_id -1 ].hex }" style="height:100px;"></div>
+							<div class="text-box text-center">
+								<input class="border w-full" type="text" name="color_input_1" value="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<script src="https://unpkg.com/vue"></script>
+		<script type="text/javascript" src="main.js"></script>
+	</body>
+</html>
