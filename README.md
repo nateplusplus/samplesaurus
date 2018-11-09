@@ -1,6 +1,6 @@
 ## SAMPLESAURUS!
 
-A fun developer tool to quickly and easily sample colors on UI template elements.
+My goal is to create a fun developer tool to quickly and easily sample colors on UI template elements.
 
 Visit http://samplesaurus.com/ to play around.
 
