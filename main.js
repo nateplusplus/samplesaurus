@@ -63,23 +63,62 @@ Vue.component('setting', {
 			required: true
 		},
 	},
-	template: `<div class="flex flex-col content-center items-center text-center">
+	template: `<div class="flex flex-col content-center items-start sm:items-center text-center">
 		<div class="flex justify-center items-center">
-			<label :for="setting.name" class="text-xl font-bold">{{setting.label}}</label>
-			<!-- <div :style="{ backgroundColor: '#cc3300' }" class="color-circle ml-4">
-				<div class="text-2xl">A</div>
-			</div> -->
+			<label :for="setting.name" class="text-md sm:text-xl font-bold">{{setting.label}}</label>
+			<circledropdown :palette="palette" :setting="setting" :selected_swatch="findPaletteByClassname(setting.value)[0]"></circledropdown>
 		</div>
-		<select class="w-1/3 border text-xl p-2" :id="setting.name" v-model="setting.value">
+		<!-- <select class="w-1/3 border text-xl p-2" :id="setting.name" v-model="setting.value">
 			<option
 				v-for="swatch in palette" 
 				:key="swatch.key" 
 				:value="swatch.classname">
 				{{ swatch.classname }}
 			</option>
-		</select>
-	</div>`
+		</select> -->
+	</div>`,
+	methods: {
+		findPaletteByClassname : function(classname) {
+			return this.palette.filter(function(data){
+				return data.classname == classname;
+			});
+		},
+	}
 });
+
+
+/**
+ * Component for a custom dropdown
+**/
+var CircleDropdown = Vue.component('circledropdown', {
+	props: {
+		setting : {
+			type: Object,
+			required: true
+		},
+		palette : {
+			type: Array,
+			required: true
+		},
+		selected_swatch : {
+			type: Object,
+			required: true
+		},
+	},
+	template: "#circle_dropdown",
+	data() {
+		return {
+			showDropDown: false
+		}
+	},
+	methods : {
+		select : function(swatch, setting) {
+			setting.value = swatch.classname;
+			this.showDropDown = false;
+		}
+	}
+});
+
 
 
 
@@ -109,26 +148,21 @@ var app = new Vue({
 				value : 'swatch2',
 				name : 'font_h'
 			},
-			// {
-			// 	label : 'Sidebar Heading Font Color',
-			// 	value : 'swatch4',
-			// 	name : 'font_sh'
-			// },
 			{
 				label : 'List Item Font Color',
 				value : 'swatch4',
 				name : 'font_li'
 			},
-			// {
-			// 	label : 'Input Background Color',
-			// 	value : 'swatch1',
-			// 	name : 'bg_input'
-			// },
-			// {
-			// 	label : 'Input Font Color',
-			// 	value : 'swatch2',
-			// 	name : 'font_input'
-			// }
+			{
+				label : 'Button Background Color',
+				value : 'swatch3',
+				name : 'bg_button'
+			},
+			{
+				label : 'Button Font Color',
+				value : 'swatch1',
+				name : 'font_button'
+			}
 		]
 	},
 	methods : {
@@ -143,7 +177,7 @@ var app = new Vue({
 			}
 
 			var palette = this.findPaletteByClassname(classname)[0];
-			var style = (el !== 'bg_page') ? { color : palette.hex } : { backgroundColor : palette.hex };
+			var style = (el !== 'bg_page' && el !== 'bg_button') ? { color : palette.hex } : { backgroundColor : palette.hex };
 
 			return style;
 		},

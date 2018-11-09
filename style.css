@@ -1,5 +1,9 @@
 body {
 	font-family:  futura-pt, sans-serif;
+	background-color: #666;
+}
+
+#site-wrapper {
 	background-color: #EEE;
 }
 
@@ -27,6 +31,7 @@ body {
 
 .swatch {
 	position: relative;
+	cursor: move;
 }
 	.swatch:before {
 		content: '';
@@ -43,12 +48,27 @@ body {
 		font-size: 3em;
 		font-weight: 600;
 	}
-	
+
 .color-circle {
 	position: relative;
 	border-radius:50%;
 	width: 30px;
+	box-sizing: border-box;
+	cursor: pointer;
 }
+	.color-circle {
+		width: 30px;
+	}
+	.circle-menu .color-circle {
+		width: 30px;
+	}
+		.circle-menu .circle-selected {
+			border: 2px solid red;
+		}
+		.circle-menu .color-circle:hover {
+			opacity: .7;
+			cursor: pointer;
+		}
 	.color-circle:before {
 		content: '';
 		padding-top: 100%;
@@ -62,6 +82,44 @@ body {
 		left: 0;
 	}
 
-#site-desc {
+#site-wrapper {
 	max-width: 800px;
 }
+
+
+
+/**
+ * Vue Transitons
+**/
+/* SLIDE-FADE */
+.slide-fade-enter-active {
+	transition: all .3s ease;
+}
+.slide-fade-leave-active {
+	transition: all .2s ease;
+}
+.slide-fade-enter { 
+	transform: translateX(-50px);
+	opacity: 0;
+}
+.slide-fade-leave-to {
+	transform: translateX(-50px);
+	opacity: 0; 
+}
+
+/* FADE */
+.fade-enter-active {
+	transition: all .3s ease;
+}
+.fade-leave-active {
+	transition: all .2s ease;
+}
+.fade-enter {
+	opacity: 0;
+}
+.fade-leave-to {
+	opacity: 0; 
+}
+
+
+
