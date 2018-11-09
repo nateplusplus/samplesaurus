@@ -1,4 +1,4 @@
-##SAMPLESAURUS!
+## SAMPLESAURUS!
 
 A fun developer tool to quickly and easily sample colors on UI template elements.
 
