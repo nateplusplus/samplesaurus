@@ -25,90 +25,87 @@
 			crossorigin="anonymous"></script>
 	</head>
 	<body class="h-screen">
-		<div id="app" class="w-full px-0 min-h-full lg:py-6 flex flex-col">
+		<div id="app" class="w-full p-0 min-h-full flex flex-col">
+			<div id="site-wrapper" class="mx-auto flex flex-col lg:flex-row content-start justify-start h-full">
+				<div class="lg:p-6 lg:w-1/4">
+					<div id="branding" class="mx-auto max-w-200 flex flex-row items-center justify-center pt-4">
+						<img src="images/samplesaurus_logo.png" alt="Samplesaurus-Rex Logo" class="pr-4">
+						<h1 class="text-center ccmonstermash">Samplesaurus!</h1>
+					</div>
 
-			<div id="site-wrapper" class="mx-auto flex flex-col content-start justify-start h-full">
-				<div id="branding" class="mx-auto max-w-200 flex flex-row items-center pt-4">
-					<img src="images/samplesaurus_logo.png" alt="Samplesaurus-Rex Logo" class="pr-4">
-					<h1 class="text-center ccmonstermash">Samplesaurus!</h1>
-				</div>
+					<p id="site-desc" class="p-8 mx-auto text-center">
+						Quickly sample a color palette on a UI template to see how colors interact.<br>
+					</p>
 
-				<p id="site-desc" class="p-8 mx-auto text-center">
-					Quickly sample a color palette on a UI template to see how colors interact.<br>
-				</p>
+					<h2 class="mt-4 text-center">Your Color Palette</h2>
+					<p class="p-2 mx-auto text-center">
+						Define your color palette by entering hex values below.
+					</p>
+					<div id="palette" class="flex flex-row content-center justify-center pt-4 pb-8">
+						<div
+							v-for="swatch in palette" 
+							:key="swatch.key">
+							<swatch :swatch="swatch"></swatch>
+						</div>
+					</div>
 
-				<h2 class="mt-4 text-center">Your Color Palette</h2>
-				<p class="p-2 mx-auto text-center">
-					Define your color palette by entering hex values below.
-				</p>
-				<div id="palette" class="flex flex-row content-center justify-center pt-4 pb-8">
-					<div
-						v-for="swatch in palette" 
-						:key="swatch.key">
-						<swatch :swatch="swatch"></swatch>
+					<h2 class="text-lg sm:text-2xl mt-8 text-center">Assign Colors</h2>
+					<p class="p-2 mx-auto text-center">
+						Assign colors to UI elements by clicking on the circles next to each element title.
+					</p>
+					<div id="settings" class="flex flex-col p-2 px-4 pb-12">
+						<div v-for="setting in settings" class="py-2 sm:py-4">
+							<setting :setting="setting" :palette="palette"></setting>
+						</div>
 					</div>
 				</div>
+				<div class="lg:w-3/4">
+					<div id="sample_page" class="flex flex-row w-full p-12 mx-auto lg:h-full" v-bind:style="getStyle('bg_page')">
+						<div class="w-full flex-initial my-12">
+							<header class="mb-4" v-bind:style="getStyle('font_h')">
+								<h1>Sample Heading</h1>
+								<h2>Sample Subheading</h2>
+							</header>
 
-				<h2 class="text-lg sm:text-2xl mt-8 text-center">Assign Colors</h2>
-				<p class="p-2 mx-auto text-center">
-					Assign colors to UI elements by clicking on the circles next to each element title.
-				</p>
-				<div id="settings" class="flex flex-col p-2 px-4 pb-12">
-					<div v-for="setting in settings" class="py-2 sm:py-4">
-						<setting :setting="setting" :palette="palette"></setting>
-					</div>
-				</div>
-
-				<p class="p-2 pb-4 mx-auto text-center">
-					Your changes will appear live in the template below. Have fun!
-				</p>
-				<div id="sample_page" class="flex flex-row w-full p-12 mx-auto" v-bind:style="getStyle('bg_page')">
-					<div class="w-full flex-initial my-12">
-						<header class="mb-4" v-bind:style="getStyle('font_h')">
-							<h1>Sample Heading</h1>
-							<h2>Sample Subheading</h2>
-						</header>
-
-						<article class="my-4" v-bind:style="getStyle('font_p')">
-							<p class="my-4">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor <a v-bind:style="getStyle('font_a')" href="#">incididunt</a> ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse <a v-bind:style="getStyle('font_a')" href="#"> cillum dolore eu fugiat</a> nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							</p>
-							<ul class="my-4" v-bind:style="getStyle('font_li')">
-								<li>List item 1</li>
-								<li>List item 2</li>
-								<li>List item 3</li>
-								<li>List item 4</li>
-							</ul>
-							<p class="my-4">
-								Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-							</p>
-							<p class="my-4">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							</p>
-						</article>
-						<h3 class="mt-12" v-bind:style="getStyle('font_h')">Here's a form!</h3>
-						<form class="flex flex-col">
-							<fieldset class="py-2">
-								<input class="text-lg block px-3 py-2 my-4 border w-1/2" type="text" placeholder="Text Input">
-								<input class="text-lg block px-3 py-2 my-4 border w-24" type="number" placeholder="123">
-								<select class="text-lg block px-3 py-2 my-4 border w-1/4">
-									<option value="1">Option 1</option>
-									<option value="2">Option 2</option>
-									<option value="3">Option 3</option>
-								</select>
-							</fieldset>
-							<fieldset class="py-2">
-								<button v-bind:style="[getStyle('bg_button'), getStyle('font_button')]" class="font-bold text-lg block px-3 py-2 my-4 border w-24">Button</button>
-							</fieldset>
-						</form>
+							<article class="my-4" v-bind:style="getStyle('font_p')">
+								<p class="my-4">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor <a v-bind:style="getStyle('font_a')" href="#">incididunt</a> ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse <a v-bind:style="getStyle('font_a')" href="#"> cillum dolore eu fugiat</a> nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+								</p>
+								<ul class="my-4" v-bind:style="getStyle('font_li')">
+									<li>List item 1</li>
+									<li>List item 2</li>
+									<li>List item 3</li>
+									<li>List item 4</li>
+								</ul>
+								<p class="my-4">
+									Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+								</p>
+								<p class="my-4">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+								</p>
+							</article>
+							<h3 class="mt-12" v-bind:style="getStyle('font_h')">Here's a form!</h3>
+							<form class="flex flex-col">
+								<fieldset class="py-2">
+									<input class="text-lg block px-3 py-2 my-4 border w-full md:w-1/2" type="text" placeholder="Text Input">
+									<input class="text-lg block px-3 py-2 my-4 border md:w-24" type="number" placeholder="123">
+									<select class="text-lg block px-3 py-2 my-4 border w-1/2 md:w-1/4">
+										<option value="1">Option 1</option>
+										<option value="2">Option 2</option>
+										<option value="3">Option 3</option>
+									</select>
+								</fieldset>
+								<fieldset class="py-2 w-full">
+									<button v-bind:style="[getStyle('bg_button'), getStyle('font_button')]" class="font-bold text-lg display-block px-3 py-2 my-4 border w-full sm:w-1/3 lg:w-32">Button</button>
+								</fieldset>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
-
 			<footer class="py-8 w-full text-center text-white text-xs">
 				Copyright ©2018 Nathan Blair
 			</footer>
-
 		</div>
 		<script id="circle_dropdown" type="x/template">
 			<div class="flex">
