@@ -66,7 +66,7 @@ Vue.component('setting', {
 	template: `<div class="flex flex-col content-center items-start sm:items-center text-center">
 		<div class="flex justify-center items-center">
 			<label :for="setting.name" class="text-md sm:text-xl font-bold">{{setting.label}}</label>
-			<circledropdown :palette="palette" :setting="setting" :selected_swatch="findPaletteByClassname(setting.value)[0]"></circledropdown>
+			<circledropdown :palette="palette" :setting="setting" :selected_swatch="findPaletteByClassname(setting.value)[0]" :options="{ orientation: 'vertical' }"></circledropdown>
 		</div>
 		<!-- <select class="w-1/3 border text-xl p-2" :id="setting.name" v-model="setting.value">
 			<option
@@ -92,18 +92,18 @@ Vue.component('setting', {
 **/
 var CircleDropdown = Vue.component('circledropdown', {
 	props: {
-		setting : {
+		model : {
 			type: Object,
 			required: true
 		},
-		palette : {
+		options : {
 			type: Array,
 			required: true
 		},
-		selected_swatch : {
+		settings : {
 			type: Object,
-			required: true
-		},
+			required: false
+		}
 	},
 	template: "#circle_dropdown",
 	data() {
@@ -112,9 +112,19 @@ var CircleDropdown = Vue.component('circledropdown', {
 		}
 	},
 	methods : {
-		select : function(swatch, setting) {
-			setting.value = swatch.classname;
+		select : function(selected_option) {
+			this.model.value = selected_option.value;
 			this.showDropDown = false;
+		},
+		getOptionByValue : function(value) {
+			return this.options.filter(function(data){
+				return data.value == value;
+			});
+		}
+	},
+	computed : {
+		isVertical : function() {
+			return (typeof this.settings != 'undefined' && this.settings.hasOwnProperty('axis') && this.settings.axis == 'y');
 		}
 	}
 });
@@ -192,6 +202,15 @@ var app = new Vue({
 			});
 		}
 	},
+	computed: {
+		paletteOptions : function() {
+			var options = new Array();
+			for (i=0; i < this.palette.length; i++) {
+				options.push({ label: this.palette[i].label, value: this.palette[i].classname, data : this.palette[i] })
+			}
+			return options;
+		}
+	}
 });
 
 

@@ -49,7 +49,7 @@
 						</div>
 					</div>
 
-					<h2 class="text-lg sm:text-2xl mt-8 text-center">Assign Colors</h2>
+					<!-- <h2 class="text-lg sm:text-2xl mt-8 text-center">Assign Colors</h2>
 					<p class="p-2 mx-auto text-center">
 						Assign colors to UI elements by clicking on the circles next to each element title.
 					</p>
@@ -57,22 +57,28 @@
 						<div v-for="setting in settings" class="py-2 sm:py-4">
 							<setting :setting="setting" :palette="palette"></setting>
 						</div>
-					</div>
+					</div> -->
 				</div>
 				<div class="lg:w-3/4">
 					<div id="sample_page" class="flex flex-row w-full p-12 mx-auto lg:h-full" v-bind:style="getStyle('bg_page')">
 						<div class="w-full flex-initial my-12">
+							<div class="text-center w-full">
+								<circledropdown :model="findSettingByName('bg_page')[0]" :options="paletteOptions"></circledropdown>
+							</div>
 							<header class="mb-4" v-bind:style="getStyle('font_h')">
-								<h1>Sample Heading</h1>
+								<h1>Sample Heading <circledropdown :model="findSettingByName('font_h')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></circledropdown></h1>
 								<h2>Sample Subheading</h2>
 							</header>
 
 							<article class="my-4" v-bind:style="getStyle('font_p')">
 								<p class="my-4">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor <a v-bind:style="getStyle('font_a')" href="#">incididunt</a> ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse <a v-bind:style="getStyle('font_a')" href="#"> cillum dolore eu fugiat</a> nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+									<div class="float-right">
+										<circledropdown :model="findSettingByName('font_p')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></circledropdown>
+									</div>
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor <a v-bind:style="getStyle('font_a')" href="#">incididunt</a> <circledropdown :model="findSettingByName('font_a')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></circledropdown> ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse <a v-bind:style="getStyle('font_a')" href="#"> cillum dolore eu fugiat</a> nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 								</p>
 								<ul class="my-4" v-bind:style="getStyle('font_li')">
-									<li>List item 1</li>
+									<li>List item 1 <circledropdown :model="findSettingByName('font_li')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></circledropdown></li>
 									<li>List item 2</li>
 									<li>List item 3</li>
 									<li>List item 4</li>
@@ -96,7 +102,7 @@
 									</select>
 								</fieldset>
 								<fieldset class="py-2 w-full">
-									<button v-bind:style="[getStyle('bg_button'), getStyle('font_button')]" class="font-bold text-lg display-block px-3 py-2 my-4 border w-full sm:w-1/3 lg:w-32">Button</button>
+									<button v-bind:style="[getStyle('bg_button'), getStyle('font_button')]" class="font-bold text-lg display-block px-3 py-2 my-4 border w-full sm:w-1/3 lg:w-32">Button</button> <circledropdown :model="findSettingByName('font_button')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></circledropdown> <circledropdown :model="findSettingByName('bg_button')[0]" :options="paletteOptions" :settings="{ axis: 'x' }"></circledropdown>
 								</fieldset>
 							</form>
 						</div>
@@ -108,23 +114,23 @@
 			</footer>
 		</div>
 		<script id="circle_dropdown" type="x/template">
-			<div class="flex">
-				<div @click="showDropDown=!showDropDown" :style="{backgroundColor: selected_swatch.hex}" class="color-circle color-circle-30 ml-4">
-					<div class="text-2xl">{{ selected_swatch.label }}</div>
+			<div class="align-middle text-black text-base items-center inline-block" @mouseleave="showDropDown=false">
+				<div @mouseover="showDropDown=true" @click.prevent="showDropDown=!showDropDown" :style="{ backgroundColor: getOptionByValue(model.value)[0].data.hex }" class="color-circle color-circle-30 inline-block border">
+					<div class="text-lg text-center">{{ getOptionByValue(model.value)[0].label }}</div>
 				</div>
-				<div class="flex items-center absolute ml-12 circle-menu">
+				<div class="flex items-center absolute circle-menu w-auto" :class=" (isVertical) ? 'menu-vertical' : 'menu-horizontal ml-6' ">
 					<transition name="fade">
-						<i v-if="showDropDown" class="fa fa-fw" :class="{ 'fa-caret-right' : showDropDown, 'fa-caret-left' : !showDropDown }"></i>
+						<i v-if="showDropDown" class="fa fa-fw" :class="[ isVertical ? 'fa-caret-down' : 'fa-caret-right' ]"></i>
 					</transition>
-					<transition name="slide-fade">
-						<div v-if="showDropDown" class="flex items-center">
-							<div v-for="swatch in palette">
+					<transition :name="(isVertical) ? 'slide-fade-down' : 'slide-fade-right'">
+						<div v-if="showDropDown" class="flex items-center dropdown-option">
+							<div v-for="option in options">
 								<div
-									@click="select(swatch, setting)"
-									:style="{ backgroundColor: swatch.hex }"
-									class="color-circle color-circle-15 ml-2"
-									:class="[ swatch.key == selected_swatch.key ? 'circle-selected' : '' ]">
-									<div class="text-2xl">{{ swatch.label }}</div>
+									@click.prevent="select(option)"
+									:style="{ backgroundColor: option.data.hex }"
+									class="color-circle color-circle-15 ml-2 border"
+									:class="[ option.value == model.value ? 'circle-selected' : '' ]">
+									<div class="text-lg text-center">{{ option.label }}</div>
 								</div>
 							</div>
 						</div>

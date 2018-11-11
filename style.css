@@ -49,18 +49,30 @@ body {
 		font-weight: 600;
 	}
 
-.color-circle {
-	position: relative;
-	border-radius:50%;
-	width: 30px;
-	box-sizing: border-box;
-	cursor: pointer;
+
+
+.circle-menu.menu-vertical {
+	flex-direction: column;
+	margin-left: 0rem;
+	margin-top: 0rem;
+	z-index: 1;
 }
-	.color-circle {
-		width: 30px;
+	.menu-horizontal {
+		margin-top: -1.7rem !important;
 	}
-	.circle-menu .color-circle {
-		width: 30px;
+	.menu-vertical .dropdown-option {
+		flex-direction: column;
+		justify-items: center;
+	}
+	.menu-vertical .dropdown-option .color-circle {
+		margin-left: 0;
+	}
+	.color-circle {
+		position: relative;
+		border-radius:50%;
+		width: 24px;
+		box-sizing: border-box;
+		cursor: pointer;
 	}
 		.circle-menu .circle-selected {
 			border: 2px solid red;
@@ -80,30 +92,43 @@ body {
 		right: 0;
 		bottom: 0;
 		left: 0;
+		padding-top: 0.12em;
 	}
 
-#site-wrapper {
-	/* max-width: 800px; */
-}
 
 
 
 /**
  * Vue Transitons
 **/
-/* SLIDE-FADE */
-.slide-fade-enter-active {
+/* SLIDE-FADE-RIGHT */
+.slide-fade-right-enter-active {
 	transition: all .3s ease;
 }
-.slide-fade-leave-active {
+.slide-fade-right-leave-active {
 	transition: all .2s ease;
 }
-.slide-fade-enter { 
+.slide-fade-right-enter { 
 	transform: translateX(-50px);
 	opacity: 0;
 }
-.slide-fade-leave-to {
+.slide-fade-right-leave-to {
 	transform: translateX(-50px);
+	opacity: 0; 
+}
+/* SLIDE-FADE-DOWN */
+.slide-fade-down-enter-active {
+	transition: all .3s ease;
+}
+.slide-fade-down-leave-active {
+	transition: all .2s ease;
+}
+.slide-fade-down-enter { 
+	transform: translateY(-50px);
+	opacity: 0;
+}
+.slide-fade-down-leave-to {
+	transform: translateY(-50px);
 	opacity: 0; 
 }
 
