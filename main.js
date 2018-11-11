@@ -173,7 +173,8 @@ var app = new Vue({
 				value : 'swatch1',
 				name : 'font_button'
 			}
-		]
+		],
+		showDropdowns : true
 	},
 	methods : {
 		getStyle : function(el) {

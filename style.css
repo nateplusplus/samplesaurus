@@ -54,7 +54,7 @@ body {
 .circle-menu.menu-vertical {
 	flex-direction: column;
 	margin-left: 0rem;
-	margin-top: 0rem;
+	margin-top: -0.3rem;
 	z-index: 1;
 }
 	.menu-horizontal {
