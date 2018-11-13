@@ -164,3 +164,18 @@ body {
 }
 
 
+.sidebar-arrow {
+	right: 50%;
+	bottom: 0;
+	margin-bottom: -2rem;
+	margin-right: -2rem;
+}
+
+@media screen and (min-width: 992px) {
+	.sidebar-arrow {
+		right: 0%;
+		top: 50%;
+		bottom: initial;
+	}
+}
+

@@ -182,7 +182,8 @@ var app = new Vue({
 			}
 		],
 		showDropdowns : false,
-		showPalette : true
+		showPalette : true,
+		showSidebarResize: false
 	},
 	methods : {
 		getStyle : function(el) {
