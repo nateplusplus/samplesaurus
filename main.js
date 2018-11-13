@@ -181,7 +181,7 @@ var app = new Vue({
 				name : 'font_button'
 			}
 		],
-		showDropdowns : true,
+		showDropdowns : false,
 		showPalette : true
 	},
 	methods : {

@@ -24,9 +24,9 @@
 			integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
 			crossorigin="anonymous"></script>
 	</head>
-	<body class="h-screen">
+	<body class="h-screen bg-grey-darkest">
 		<div id="app" class="w-full p-0 min-h-full flex flex-col">
-			<div id="site-wrapper" class="mx-auto flex flex-col lg:flex-row content-start justify-start h-full">
+			<div id="site-wrapper" class="mx-auto flex flex-col lg:flex-row content-start justify-start h-full bg-grey">
 				<div class="lg:p-6 lg:w-1/4">
 					<div id="branding" class="mx-auto max-w-200 flex flex-row items-center justify-center pt-4">
 						<img src="images/samplesaurus_logo.png" alt="Samplesaurus-Rex Logo" class="pr-4">
@@ -50,72 +50,76 @@
 									<swatch :swatch="swatch"></swatch>
 								</div>
 							</div>
-							<a @click.prevent="showPalette = false" href="#" class="text-center text-black mb-4 inline-block w-full lg:hidden no-underline">
+							<button title="Shrink palette" @click.prevent="showPalette = false" class="text-center text-black mb-4 inline-block w-full lg:hidden no-underline">
 								<i class="fa fa-2x fa-fw" :class="[ showPalette ? 'fa-caret-up' : 'fa-caret-down' ]"></i>
-								<small class="inline-block w-full">minimize</small>
-							</a>
+							</button>
 						</div>
-					</transition>
-					<transition name="fade">
-						<a id="mini-palette" href="#" @click.prevent="showPalette = true" v-show="!showPalette" class="flex flex-row content-center justify-center p-4">
-							<div
-								v-for="swatch in palette" 
-								:key="swatch.key">
-								<div class="mini-swatch " :style="{ backgroundColor: swatch.hex }"></div>
-							</div>
-						</a>
 					</transition>
 				</div>
 				<div class="lg:w-3/4">
-					<div id="sample_page" class="flex flex-row w-full p-12 mx-auto lg:h-full" v-bind:style="getStyle('bg_page')">
-						<div class="w-full flex-initial my-12">
-							<a href="#" class="float-right no-underline text-grey-darker" @click.prevent="showDropdowns=!showDropdowns">
-								<small><i class="far fa-fw" :class="[ (showDropdowns) ? 'fa-eye' : 'fa-eye-slash' ]"></i> toggle controls</small>
-							</a>
-							<div v-if="showDropdowns" class="text-center w-full">
-								<small>[body]</small>
-								<circledropdown :model="findSettingByName('bg_page')[0]" :options="paletteOptions"></circledropdown>
+					<div id="sample_page" class="flex flex-row w-full pb-12 mx-auto lg:h-full" v-bind:style="getStyle('bg_page')">
+						<div class="w-full flex-initial mb-12">
+							<div class="w-full flex flex-row items-center justify-between h-12 bg-grey-light mb-12 p-4">
+								<div class="w-1/2">
+									<transition name="fade">
+										<button id="mini-palette" title="Expand palette" @click.prevent="showPalette = true" v-show="!showPalette" class="flex flex-row content-center justify-center p-4">
+											<div
+												v-for="swatch in palette" 
+												:key="swatch.key">
+												<div class="mini-swatch " :style="{ backgroundColor: swatch.hex }"></div>
+											</div>
+										</button>
+									</transition>
+								</div>
+								<button title="Toggle controls within layout" class="float-right no-underline text-grey-darker" @click.prevent="showDropdowns=!showDropdowns">
+									<i class="far fa-fw" :class="[ (showDropdowns) ? 'fa-eye' : 'fa-eye-slash' ]"></i>
+								</button>
 							</div>
-							<header class="mb-4" v-bind:style="getStyle('font_h')">
-								<h1>Sample Heading <circledropdown v-if="showDropdowns" :model="findSettingByName('font_h')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></circledropdown></h1>
-								<h2>Sample Subheading</h2>
-							</header>
+							<div class="px-12">
+								<div v-if="showDropdowns" class="text-center w-full">
+									<circledropdown :model="findSettingByName('bg_page')[0]" :options="paletteOptions"></circledropdown>
+								</div>
+								<header class="mb-4" v-bind:style="getStyle('font_h')">
+									<h1>Sample Heading <circledropdown v-if="showDropdowns" :model="findSettingByName('font_h')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></circledropdown></h1>
+									<h2>Sample Subheading</h2>
+								</header>
 
-							<article class="my-4" v-bind:style="getStyle('font_p')">
-								<p class="my-4">
-									<div class="float-right">
-										<circledropdown v-if="showDropdowns" :model="findSettingByName('font_p')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></circledropdown>
-									</div>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor <a v-bind:style="getStyle('font_a')" href="#">incididunt</a> <circledropdown v-if="showDropdowns" :model="findSettingByName('font_a')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></circledropdown> ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse <a v-bind:style="getStyle('font_a')" href="#"> cillum dolore eu fugiat</a> nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-								</p>
-								<ul class="my-4" v-bind:style="getStyle('font_li')">
-									<li>List item 1 <circledropdown v-if="showDropdowns" :model="findSettingByName('font_li')[0]" :options="paletteOptions"></circledropdown></li>
-									<li>List item 2</li>
-									<li>List item 3</li>
-									<li>List item 4</li>
-								</ul>
-								<p class="my-4">
-									Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-								</p>
-								<p class="my-4">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-								</p>
-							</article>
-							<h3 class="mt-12" v-bind:style="getStyle('font_h')">Here's a form!</h3>
-							<form class="flex flex-col">
-								<fieldset class="py-2">
-									<input class="text-lg block px-3 py-2 my-4 border w-full md:w-1/2" type="text" placeholder="Text Input">
-									<input class="text-lg block px-3 py-2 my-4 border md:w-24" type="number" placeholder="123">
-									<select class="text-lg block px-3 py-2 my-4 border w-1/2 md:w-1/4">
-										<option value="1">Option 1</option>
-										<option value="2">Option 2</option>
-										<option value="3">Option 3</option>
-									</select>
-								</fieldset>
-								<fieldset class="py-2 w-full">
-									<button v-bind:style="[getStyle('bg_button'), getStyle('font_button')]" class="font-bold text-lg display-block px-3 py-2 my-4 border w-full sm:w-1/3 lg:w-32">Button</button> <circledropdown v-if="showDropdowns" :model="findSettingByName('font_button')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></circledropdown> <circledropdown v-if="showDropdowns" :model="findSettingByName('bg_button')[0]" :options="paletteOptions" :settings="{ axis: 'x' }"></circledropdown>
-								</fieldset>
-							</form>
+								<article class="my-4" v-bind:style="getStyle('font_p')">
+									<p class="my-4">
+										<div class="float-right">
+											<circledropdown v-if="showDropdowns" :model="findSettingByName('font_p')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></circledropdown>
+										</div>
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor <a v-bind:style="getStyle('font_a')" href="#">incididunt</a> <circledropdown v-if="showDropdowns" :model="findSettingByName('font_a')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></circledropdown> ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse <a v-bind:style="getStyle('font_a')" href="#"> cillum dolore eu fugiat</a> nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+									</p>
+									<ul class="my-4" v-bind:style="getStyle('font_li')">
+										<li>List item 1 <circledropdown v-if="showDropdowns" :model="findSettingByName('font_li')[0]" :options="paletteOptions"></circledropdown></li>
+										<li>List item 2</li>
+										<li>List item 3</li>
+										<li>List item 4</li>
+									</ul>
+									<p class="my-4">
+										Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+									</p>
+									<p class="my-4">
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+									</p>
+								</article>
+								<h3 class="mt-12" v-bind:style="getStyle('font_h')">Here's a form!</h3>
+								<form class="flex flex-col">
+									<fieldset class="py-2">
+										<input class="text-lg block px-3 py-2 my-4 border w-full md:w-1/2" type="text" placeholder="Text Input">
+										<input class="text-lg block px-3 py-2 my-4 border md:w-24" type="number" placeholder="123">
+										<select class="text-lg block px-3 py-2 my-4 border w-1/2 md:w-1/4">
+											<option value="1">Option 1</option>
+											<option value="2">Option 2</option>
+											<option value="3">Option 3</option>
+										</select>
+									</fieldset>
+									<fieldset class="py-2 w-full">
+										<button v-bind:style="[getStyle('bg_button'), getStyle('font_button')]" class="font-bold text-lg display-block px-3 py-2 my-4 border w-full sm:w-1/3 lg:w-32">Button</button> <circledropdown v-if="showDropdowns" :model="findSettingByName('font_button')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></circledropdown> <circledropdown v-if="showDropdowns" :model="findSettingByName('bg_button')[0]" :options="paletteOptions" :settings="{ axis: 'x' }"></circledropdown>
+									</fieldset>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
