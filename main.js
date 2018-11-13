@@ -183,7 +183,8 @@ var app = new Vue({
 		],
 		showDropdowns : false,
 		showPalette : true,
-		showSidebarResize: false
+		sidebarFocused : false,
+		windowWidth : window.innerWidth
 	},
 	methods : {
 		getStyle : function(el) {
@@ -216,11 +217,21 @@ var app = new Vue({
 		paletteOptions : function() {
 			var options = new Array();
 			for (i=0; i < this.palette.length; i++) {
-				options.push({ label: this.palette[i].label, value: this.palette[i].classname, data : this.palette[i] })
+				options.push({ label: this.palette[i].label, value: this.palette[i].classname, data : this.palette[i] });
 			}
 			return options;
+		},
+		showSidebarResize : function() {
+			return ( this.windowWidth < 992 || !this.showPalette || this.sidebarFocused );
 		}
-	}
+	},
+	mounted: function() {
+		this.$nextTick(() => {
+			window.addEventListener('resize', () => {
+				this.windowWidth = window.innerWidth
+			});
+		});
+	},
 });
 
 
