@@ -38,7 +38,7 @@ Vue.component('swatch', {
 	},
 	template: `<div class="ui-state-default">
 		<div>
-			<div class="swatch" :style="{ backgroundColor: swatch.hex }">
+			<div class="swatch" :style="{ backgroundColor: swatch.hex }" :class="[ (invertLabel(swatch.hex)) ? 'text-white' : 'text-black' ]">
 				<div class="text-center futura swatch-label">
 					{{ swatch.label }}
 				</div>
@@ -47,42 +47,15 @@ Vue.component('swatch', {
 				<input class="border border-t-0 border-l-0 border-r-0 text-center w-full p-2" type="text" v-model="swatch.hex" value="">
 			</div>
 		</div>
-	</div>`
-});
-
-
-// Setting component for each of our dropdowns
-Vue.component('setting', {
-	props: {
-		setting : {
-			type: Object,
-			required: true
-		},
-		palette : {
-			type: Array,
-			required: true
-		},
-	},
-	template: `<div class="flex flex-col content-center items-start sm:items-center text-center">
-		<div class="flex justify-center items-center">
-			<label :for="setting.name" class="text-md sm:text-xl font-bold">{{setting.label}}</label>
-			<circledropdown :palette="palette" :setting="setting" :selected_swatch="findPaletteByClassname(setting.value)[0]" :options="{ orientation: 'vertical' }"></circledropdown>
-		</div>
-		<!-- <select class="w-1/3 border text-xl p-2" :id="setting.name" v-model="setting.value">
-			<option
-				v-for="swatch in palette" 
-				:key="swatch.key" 
-				:value="swatch.classname">
-				{{ swatch.classname }}
-			</option>
-		</select> -->
 	</div>`,
-	methods: {
-		findPaletteByClassname : function(classname) {
-			return this.palette.filter(function(data){
-				return data.classname == classname;
-			});
-		},
+	methods : {
+		invertLabel : function(color) {
+			// if only first half of color is defined, repeat it
+			if(color.length < 5) {
+				color += color.slice(1);
+			}
+			return ((color.replace('#','0x')) < (0xffffff/2));
+		}
 	}
 });
 
@@ -105,7 +78,31 @@ var CircleDropdown = Vue.component('circledropdown', {
 			required: false
 		}
 	},
-	template: "#circle_dropdown",
+	template: `
+	<div class="align-middle text-black text-base items-center inline-block" @mouseleave="showDropDown=false">
+		<div @mouseover="showDropDown=true" @click.prevent="showDropDown=!showDropDown" :style="{ backgroundColor: selectedOption.data.hex }" :class="getLabelClass(selectedOption.data.hex)" class="color-circle color-circle-30 inline-block border">
+			<div class="text-lg text-center">{{ selectedOption.label }}</div>
+		</div>
+		<div class="flex items-center absolute circle-menu w-auto" :class=" (isVertical) ? 'menu-vertical' : 'menu-horizontal ml-6' ">
+			<transition name="fade">
+				<i v-show="showDropDown" class="fa fa-fw" :class="[ isVertical ? 'fa-caret-down' : 'fa-caret-right' ]"></i>
+			</transition>
+			<transition :name="(isVertical) ? 'slide-fade-down' : 'slide-fade-right'">
+				<div v-show="showDropDown" class="flex items-center dropdown-option">
+					<div v-for="option in options">
+						<div
+							@click.prevent="select(option)"
+							:style="{ backgroundColor: option.data.hex }"
+							class="color-circle color-circle-15 ml-2 border"
+							:class="[ option.value == model.value ? 'circle-selected' : '', getLabelClass(option.data.hex) ]">
+							<div class="text-lg text-center">{{ option.label }}</div>
+						</div>
+					</div>
+				</div>
+			</transition>
+		</div>
+	</div>
+	`,
 	data() {
 		return {
 			showDropDown: false
@@ -120,11 +117,21 @@ var CircleDropdown = Vue.component('circledropdown', {
 			return this.options.filter(function(data){
 				return data.value == value;
 			});
+		},
+		getLabelClass : function(color) {
+			// if only first half of color is defined, repeat it
+			if(color.length < 5) {
+				color += color.slice(1);
+			}
+			return ((color.replace('#','0x')) < (0xffffff/2)) ? 'text-white' : 'text-black';
 		}
 	},
 	computed : {
 		isVertical : function() {
 			return (typeof this.settings != 'undefined' && this.settings.hasOwnProperty('axis') && this.settings.axis == 'y');
+		},
+		selectedOption : function() {
+			return this.getOptionByValue(this.model.value)[0];
 		}
 	}
 });
@@ -174,7 +181,8 @@ var app = new Vue({
 				name : 'font_button'
 			}
 		],
-		showDropdowns : true
+		showDropdowns : true,
+		showPalette : true
 	},
 	methods : {
 		getStyle : function(el) {

@@ -48,7 +48,10 @@ body {
 		font-size: 3em;
 		font-weight: 600;
 	}
-
+.mini-swatch {
+	width: 20px;
+	height: 20px;
+}
 
 
 .circle-menu.menu-vertical {
@@ -116,6 +119,8 @@ body {
 	transform: translateX(-50px);
 	opacity: 0; 
 }
+
+
 /* SLIDE-FADE-DOWN */
 .slide-fade-down-enter-active {
 	transition: all .3s ease;
@@ -146,5 +151,21 @@ body {
 	opacity: 0; 
 }
 
+
+/* SHRINK-FADE-DOWN */
+.shrink-fade-down-enter-active {
+	transition: all .3s ease;
+}
+.shrink-fade-down-leave-active {
+	transition: all .2s ease;
+}
+.shrink-fade-down-enter {
+	transform: translateY(-150px) scale(0.3);
+	opacity: 0;
+}
+.shrink-fade-down-leave-to {
+	transform: translateY(-150px) scale(0.3);
+	opacity: 0; 
+}
 
 

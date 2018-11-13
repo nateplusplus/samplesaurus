@@ -37,27 +37,34 @@
 						Quickly sample a color palette on a UI template to see how colors interact.<br>
 					</p>
 
-					<h2 class="mt-4 text-center">Your Color Palette</h2>
-					<p class="p-2 mx-auto text-center">
-						Define your color palette by entering hex values below.
-					</p>
-					<div id="palette" class="flex flex-row content-center justify-center pt-4 pb-8">
-						<div
-							v-for="swatch in palette" 
-							:key="swatch.key">
-							<swatch :swatch="swatch"></swatch>
+					<transition name="shrink-fade-down">
+						<div id="palette-container" v-show="showPalette">
+							<h2 class="mt-4 text-center">Your Color Palette</h2>
+							<p class="p-2 mx-auto text-center">
+								Define your color palette by entering hex values below.
+							</p>
+							<div id="palette" class="flex flex-row content-center justify-center pt-4 pb-8">
+								<div
+									v-for="swatch in palette" 
+									:key="swatch.key">
+									<swatch :swatch="swatch"></swatch>
+								</div>
+							</div>
+							<a @click.prevent="showPalette = false" href="#" class="text-center text-black mb-4 inline-block w-full lg:hidden no-underline">
+								<i class="fa fa-2x fa-fw" :class="[ showPalette ? 'fa-caret-up' : 'fa-caret-down' ]"></i>
+								<small class="inline-block w-full">minimize</small>
+							</a>
 						</div>
-					</div>
-
-					<!-- <h2 class="text-lg sm:text-2xl mt-8 text-center">Assign Colors</h2>
-					<p class="p-2 mx-auto text-center">
-						Assign colors to UI elements by clicking on the circles next to each element title.
-					</p>
-					<div id="settings" class="flex flex-col p-2 px-4 pb-12">
-						<div v-for="setting in settings" class="py-2 sm:py-4">
-							<setting :setting="setting" :palette="palette"></setting>
-						</div>
-					</div> -->
+					</transition>
+					<transition name="fade">
+						<a id="mini-palette" href="#" @click.prevent="showPalette = true" v-show="!showPalette" class="flex flex-row content-center justify-center p-4">
+							<div
+								v-for="swatch in palette" 
+								:key="swatch.key">
+								<div class="mini-swatch " :style="{ backgroundColor: swatch.hex }"></div>
+							</div>
+						</a>
+					</transition>
 				</div>
 				<div class="lg:w-3/4">
 					<div id="sample_page" class="flex flex-row w-full p-12 mx-auto lg:h-full" v-bind:style="getStyle('bg_page')">
@@ -117,31 +124,6 @@
 				Copyright ©2018 Nathan Blair
 			</footer>
 		</div>
-		<script id="circle_dropdown" type="x/template">
-			<div class="align-middle text-black text-base items-center inline-block" @mouseleave="showDropDown=false">
-				<div @mouseover="showDropDown=true" @click.prevent="showDropDown=!showDropDown" :style="{ backgroundColor: getOptionByValue(model.value)[0].data.hex }" class="color-circle color-circle-30 inline-block border">
-					<div class="text-lg text-center">{{ getOptionByValue(model.value)[0].label }}</div>
-				</div>
-				<div class="flex items-center absolute circle-menu w-auto" :class=" (isVertical) ? 'menu-vertical' : 'menu-horizontal ml-6' ">
-					<transition name="fade">
-						<i v-if="showDropDown" class="fa fa-fw" :class="[ isVertical ? 'fa-caret-down' : 'fa-caret-right' ]"></i>
-					</transition>
-					<transition :name="(isVertical) ? 'slide-fade-down' : 'slide-fade-right'">
-						<div v-if="showDropDown" class="flex items-center dropdown-option">
-							<div v-for="option in options">
-								<div
-									@click.prevent="select(option)"
-									:style="{ backgroundColor: option.data.hex }"
-									class="color-circle color-circle-15 ml-2 border"
-									:class="[ option.value == model.value ? 'circle-selected' : '' ]">
-									<div class="text-lg text-center">{{ option.label }}</div>
-								</div>
-							</div>
-						</div>
-					</transition>
-				</div>
-			</div>
-		</script>
 		<script src="https://unpkg.com/vue"></script>
 		<script type="text/javascript" src="main.js"></script>
 	</body>
