@@ -5,14 +5,14 @@
 		<title>Samplesaurus</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://use.typekit.net/eku8qrr.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
-		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="css/style.css">
 
 		<link href="//cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+		<link href="css/lib/farbtastic.css" rel="stylesheet">
 
 		<script
 		src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -23,6 +23,7 @@
 			src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
 			integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
 			crossorigin="anonymous"></script>
+
 	</head>
 	<body class="h-screen bg-grey-darkest">
 		<div id="app" class="w-full p-0 min-h-full flex flex-col">
@@ -50,6 +51,7 @@
 								</div>
 							</div>
 						</div>
+						<div id="colorpicker"></div>
 					</div>
 					<transition name='slide-fade-right'>
 						<button v-show="showSidebarResize" title="Shrink Sidebar" @click.prevent="showPalette=!showPalette" class="text-center text-grey-darkest absolute inline-block no-underline sidebar-arrow z-0 rounded-b-full lg:rounded-b-none lg:rounded-r-full px-4 lg:px-0 py-4 bg-grey">
@@ -131,6 +133,7 @@
 			</footer>
 		</div>
 		<script src="https://unpkg.com/vue"></script>
-		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="js/lib/farbtastic.js"></script>
 	</body>
 </html>

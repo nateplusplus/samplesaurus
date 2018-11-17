@@ -44,7 +44,7 @@ Vue.component('swatch', {
 				</div>
 			</div>
 			<div class="text-center">
-				<input class="border border-t-0 border-l-0 border-r-0 text-center w-full p-2" type="text" v-model="swatch.hex" value="">
+				<input :id="'hex-'+swatch.key" class="border border-t-0 border-l-0 border-r-0 text-center w-full p-2" type="text" v-model="swatch.hex" value="">
 			</div>
 		</div>
 	</div>`,
@@ -231,12 +231,14 @@ var app = new Vue({
 				this.windowWidth = window.innerWidth
 			});
 		});
+
+		// Sortable plugin for re-arranging swatches
+		$(function(){
+			// $( "#palette" ).sortable();
+			// $( "#palette" ).disableSelection();
+
+			$('#colorpicker').farbtastic('#hex-1');
+		});
 	},
 });
 
-
-// Sortable plugin for re-arranging swatches
-$(function(){
-	$( "#palette" ).sortable();
-	$( "#palette" ).disableSelection();
-});

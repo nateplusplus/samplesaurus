@@ -26,7 +26,7 @@ body {
 
 .swatch {
 	position: relative;
-	cursor: move;
+	/* cursor: move; */
 }
 	.swatch:before {
 		content: '';
