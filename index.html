@@ -27,6 +27,23 @@
 	</head>
 	<body class="h-screen bg-grey-darkest">
 		<div id="app" class="w-full p-0 min-h-full flex flex-col">
+			<div v-show="showModal" class="modal fixed absolute z-50 h-screen w-full flex flex-col items-center justify-center font-sans">
+				<div @click.self="showModal=!showModal" class="h-screen w-full absolute flex items-center justify-center bg-modal">
+					<div class="bg-white rounded shadow shadow-lg p-2 m-4 max-w-xs max-h-full text-center overflow-y-scroll">
+						<div @click="showModal=!showModal" class="text-right">
+							<i class="fas fa-times fa-fw"></i>
+						</div>
+						<div class="modal-body p-8">
+							<div class="mb-8">
+								<div id="colorpicker"></div>
+							</div>
+							<div class="flex justify-center">
+								<button @click="showModal=!showModal" class="flex-no-shrink text-white py-2 px-4 rounded bg-teal hover:bg-teal-dark">Done</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div id="site-wrapper" class="mx-auto flex flex-col lg:flex-row content-start justify-start h-full bg-grey">
 				<div id="sidebar-controls" @mouseover="sidebarFocused=true" @mouseleave="sidebarFocused=false" class="relative flex-none" :class="[ (showPalette) ? 'lg:w-1/4' : w-4 ]" style="min-height: 1rem;">
 					<div class="lg:p-6 w-full border border-t-0 border-b-0 border-l-0 border-r-4 h-full lg:absolute bg-grey z-10" v-show="showPalette" >
@@ -47,11 +64,10 @@
 								<div
 									v-for="swatch in palette" 
 									:key="swatch.key">
-									<swatch :swatch="swatch"></swatch>
+									<swatch @open-modal="showModal=true" :swatch="swatch"></swatch>
 								</div>
 							</div>
 						</div>
-						<div id="colorpicker"></div>
 					</div>
 					<transition name='slide-fade-right'>
 						<button v-show="showSidebarResize" title="Shrink Sidebar" @click.prevent="showPalette=!showPalette" class="text-center text-grey-darkest absolute inline-block no-underline sidebar-arrow z-0 rounded-b-full lg:rounded-b-none lg:rounded-r-full px-4 lg:px-0 py-4 bg-grey">

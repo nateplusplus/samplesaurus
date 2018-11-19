@@ -44,7 +44,7 @@ Vue.component('swatch', {
 				</div>
 			</div>
 			<div class="text-center">
-				<input :id="'hex-'+swatch.key" class="border border-t-0 border-l-0 border-r-0 text-center w-full p-2" type="text" v-model="swatch.hex" value="">
+				<input @click="$emit('open-modal')" :id="'hex-'+swatch.key" class="colorwell border border-t-0 border-l-0 border-r-0 text-center w-full p-2" type="text" v-model="swatch.hex" value="">
 			</div>
 		</div>
 	</div>`,
@@ -184,7 +184,8 @@ var app = new Vue({
 		showDropdowns : false,
 		showPalette : true,
 		sidebarFocused : false,
-		windowWidth : window.innerWidth
+		windowWidth : window.innerWidth,
+		showModal : false
 	},
 	methods : {
 		getStyle : function(el) {
@@ -237,7 +238,19 @@ var app = new Vue({
 			// $( "#palette" ).sortable();
 			// $( "#palette" ).disableSelection();
 
-			$('#colorpicker').farbtastic('#hex-1');
+			var f = $.farbtastic('#colorpicker');
+			var p = $('#colorpicker').css('opacity', 0.25);
+			var selected;
+			$('.colorwell')
+				.each(function () { f.linkTo(this); $(this).css('opacity', 0.75); })
+				.focus(function() {
+					if (selected) {
+						$(selected).css('opacity', 0.75).removeClass('colorwell-selected');
+					}
+					f.linkTo(this);
+					p.css('opacity', 1);
+					$(selected = this).css('opacity', 1).addClass('colorwell-selected');
+				});
 		});
 	},
 });
