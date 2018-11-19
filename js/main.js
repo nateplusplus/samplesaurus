@@ -233,24 +233,31 @@ var app = new Vue({
 			});
 		});
 
+		var self = this; //vue
+
 		// Sortable plugin for re-arranging swatches
 		$(function(){
 			// $( "#palette" ).sortable();
 			// $( "#palette" ).disableSelection();
 
 			var f = $.farbtastic('#colorpicker');
-			var p = $('#colorpicker').css('opacity', 0.25);
 			var selected;
 			$('.colorwell')
-				.each(function () { f.linkTo(this); $(this).css('opacity', 0.75); })
-				.focus(function() {
-					if (selected) {
-						$(selected).css('opacity', 0.75).removeClass('colorwell-selected');
-					}
+				.each(function () {
 					f.linkTo(this);
-					p.css('opacity', 1);
-					$(selected = this).css('opacity', 1).addClass('colorwell-selected');
+				})
+				.focus(function() {
+					f.linkTo(this);
 				});
+
+			$('.colorwell').on('change', function(e) {
+				e.target.dispatchEvent(new Event('input'));
+				// self.$emit('change', this.value);
+			});
+			
+			self.$on('change', function(data) {
+			
+			});
 		});
 	},
 });
