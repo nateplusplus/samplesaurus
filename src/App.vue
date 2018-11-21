@@ -125,38 +125,9 @@
 
 <script>
 
-// Some default data
-var palette_data = [
-	{
-		key : 1,
-		classname: 'swatch1',
-		label: 'A',
-		hex : '#FEFEFE'
-	},
-	{
-		key : 2,
-		classname: 'swatch2',
-		label: 'B',
-		hex : '#FE6A04'
-	},
-	{
-		key : 3,
-		classname: 'swatch3',
-		label: 'C',
-		hex : '#2273CB'
-	},
-	{
-		key : 4,
-		classname: 'swatch4',
-		label: 'D',
-		hex : '#222222'
-	},
-];
-
-
-
 import Swatch from './components/Swatch.vue'
 import CircleDropdown from './components/CircleDropdown.vue'
+import Data from './assets/js/Data.js'
 
 export default {
 	name: 'app',
@@ -164,46 +135,10 @@ export default {
 		Swatch,
 		CircleDropdown
 	},
-	data: function() {
+	data() {
 		return {
-			palette : palette_data,
-			settings : [
-				{
-					label : 'Background Color',
-					value : 'swatch1',
-					name : 'bg_page'
-				},
-				{
-					label : 'Paragraph Font Color',
-					value : 'swatch4',
-					name : 'font_p'
-				},
-				{
-					label : 'Link Color',
-					value : 'swatch3',
-					name : 'font_a'
-				},
-				{
-					label : 'Heading Font Color',
-					value : 'swatch2',
-					name : 'font_h'
-				},
-				{
-					label : 'List Item Font Color',
-					value : 'swatch4',
-					name : 'font_li'
-				},
-				{
-					label : 'Button Background Color',
-					value : 'swatch3',
-					name : 'bg_button'
-				},
-				{
-					label : 'Button Font Color',
-					value : 'swatch1',
-					name : 'font_button'
-				}
-			],
+			palette : Data.palette_data,
+			settings : Data.settings_data,
 			showDropdowns : false,
 			showPalette : true,
 			sidebarFocused : false,
@@ -241,8 +176,12 @@ export default {
 	computed: {
 		paletteOptions : function() {
 			var options = new Array();
-			for (i=0; i < this.palette.length; i++) {
-				options.push({ label: this.palette[i].label, value: this.palette[i].classname, data : this.palette[i] });
+			for (var i=0; i < this.palette.length; i++) {
+				options.push({
+					label: this.palette[i].label,
+					value: this.palette[i].classname,
+					data : this.palette[i]
+				});
 			}
 			return options;
 		},
@@ -261,8 +200,6 @@ export default {
 
 		// Sortable plugin for re-arranging swatches
 		$(function(){
-			// $( "#palette" ).sortable();
-			// $( "#palette" ).disableSelection();
 
 			var f = $.farbtastic('#colorpicker');
 			var selected;
@@ -276,24 +213,10 @@ export default {
 
 			$('.colorwell').on('change', function(e) {
 				e.target.dispatchEvent(new Event('input'));
-				// self.$emit('change', this.value);
-			});
-			
-			self.$on('change', function(data) {
-			
 			});
 		});
 	}
 }
 </script>
 
-<style>
-#app {
-	font-family: 'Avenir', Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
-	margin-top: 60px;
-}
-</style>
+
