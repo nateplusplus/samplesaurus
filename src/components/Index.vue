@@ -2,34 +2,36 @@
 	<div>
 		<div id="site-wrapper" class="mx-auto flex flex-col lg:flex-row content-start justify-start h-full bg-grey">
 			<div id="sidebar-controls" @mouseover="sidebarFocused=true" @mouseleave="sidebarFocused=false" class="relative flex-none" :class="[ (showPalette) ? 'lg:w-1/4' : w-4 ]" style="min-height: 1rem;">
-				<div class="lg:p-6 w-full border border-t-0 border-b-0 border-l-0 border-r-4 h-full lg:absolute bg-grey z-10" v-show="showPalette" >
-					<div id="branding" class="mx-auto max-w-200 flex flex-row items-center justify-center pt-4">
-						<img src="../assets/images/samplesaurus_logo.png" alt="Samplesaurus-Rex Logo" class="pr-4">
-						<h1 class="text-center ccmonstermash">Samplesaurus!</h1>
-					</div>
-					<p id="site-desc" class="p-8 mx-auto text-center">
-						Quickly sample a color palette on a UI template to see how colors interact.<br>
-					</p>
-					<div id="palette-container">
-						<h2 class="mt-4 text-center">Your Color Palette</h2>
-						<p class="p-2 mx-auto text-center">
-							Define your color palette by entering hex values below.
+				<div class="lg:fixed lg:h-full" :class="[ (showPalette) ? 'lg:w-1/4' : w-4 ]">
+					<div class="lg:p-6 w-full border border-t-0 border-b-0 border-l-0 border-r-4 h-full lg:absolute bg-grey z-10" v-show="showPalette" >
+						<div id="branding" class="mx-auto max-w-200 flex flex-row items-center justify-center pt-4">
+							<img src="../assets/images/samplesaurus_logo.png" alt="Samplesaurus-Rex Logo" class="pr-4">
+							<h1 class="text-center ccmonstermash">Samplesaurus!</h1>
+						</div>
+						<p id="site-desc" class="p-8 mx-auto text-center">
+							Quickly sample a color palette on a UI template to see how colors interact.<br>
 						</p>
-						<div id="palette" class="flex flex-row content-center justify-center pt-4 pb-8">
-							<div
-								v-for="swatch in palette" 
-								:key="swatch.key">
-								<swatch :swatch="swatch" :activeModal="activeModal" @openSwatchModal="activeModal = swatch.key" @closeSwatchModal="closeModals(swatch.key)"></swatch>
+						<div id="palette-container">
+							<h2 class="mt-4 text-center">Your Color Palette</h2>
+							<p class="p-2 mx-auto text-center">
+								Define your color palette by entering hex values below.
+							</p>
+							<div id="palette" class="flex flex-row content-center justify-center pt-4 pb-8">
+								<div
+									v-for="swatch in palette" 
+									:key="swatch.key">
+									<swatch :swatch="swatch" :activeModal="activeModal" @openSwatchModal="activeModal = swatch.key" @closeSwatchModal="closeModals(swatch.key)"></swatch>
+								</div>
 							</div>
 						</div>
 					</div>
+					<transition name='slide-fade-right'>
+						<button v-show="showSidebarResize" title="Shrink Sidebar" @click.prevent="showPalette=!showPalette" class="text-center text-grey-darkest absolute inline-block no-underline sidebar-arrow z-0 rounded-b-full lg:rounded-b-none lg:rounded-r-full px-4 lg:px-0 py-4 bg-grey">
+							<i class="fa fa-2x fa-fw hidden lg:inline-block" :class="[ showPalette ? 'fa-caret-left' : 'fa-caret-right' ]"></i>
+							<i class="fa fa-2x fa-fw lg:hidden" :class="[ showPalette ? 'fa-caret-up' : 'fa-caret-down' ]"></i>
+						</button>
+					</transition>
 				</div>
-				<transition name='slide-fade-right'>
-					<button v-show="showSidebarResize" title="Shrink Sidebar" @click.prevent="showPalette=!showPalette" class="text-center text-grey-darkest absolute inline-block no-underline sidebar-arrow z-0 rounded-b-full lg:rounded-b-none lg:rounded-r-full px-4 lg:px-0 py-4 bg-grey">
-						<i class="fa fa-2x fa-fw hidden lg:inline-block" :class="[ showPalette ? 'fa-caret-left' : 'fa-caret-right' ]"></i>
-						<i class="fa fa-2x fa-fw lg:hidden" :class="[ showPalette ? 'fa-caret-up' : 'fa-caret-down' ]"></i>
-					</button>
-				</transition>
 			</div>
 			<div>
 				<div id="sample_page" class="flex flex-row w-full pb-12 mx-auto lg:h-full" v-bind:style="getStyle('bg_page')">

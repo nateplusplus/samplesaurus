@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="relative">
 		<div>
 			<div class="swatch" :style="{ backgroundColor : swatch.hex }" :class="[ (invertLabel(swatch.hex)) ? 'text-white' : 'text-black' ]">
 				<div class="text-center futura swatch-label">
