@@ -27,33 +27,24 @@
 <script>
 
 export default {
-	name: 'CircleDropdown',
-	props: {
+	name : 'CircleDropdown',
+	props : {
 		model : {
-			type: Object,
-			required: true
+			type : Object,
+			required : true
 		},
 		options : {
-			type: Array,
-			required: true
+			type : Array,
+			required : true
 		},
 		settings : {
-			type: Object,
-			required: false
-		}
-	},
-	methods : {
-		invertLabel : function(color) {
-			// if only first half of color is defined, repeat it
-			if(color.length < 5) {
-				color += color.slice(1);
-			}
-			return ((color.replace('#','0x')) < (0xffffff/2));
+			type : Object,
+			required : false
 		}
 	},
 	data() {
 		return {
-			showDropDown: false
+			showDropDown : false
 		}
 	},
 	methods : {
@@ -62,16 +53,16 @@ export default {
 			this.showDropDown = false;
 		},
 		getOptionByValue : function(value) {
-			return this.options.filter(function(data){
+			return this.options.filter(function(data) {
 				return data.value == value;
 			});
 		},
 		getLabelClass : function(color) {
 			// if only first half of color is defined, repeat it
-			if(color.length < 5) {
+			if (color.length < 5) {
 				color += color.slice(1);
 			}
-			return ((color.replace('#','0x')) < (0xffffff/2)) ? 'text-white' : 'text-black';
+			return ((color.replace('#', '0x')) < (0xffffff / 2)) ? 'text-white' : 'text-black';
 		}
 	},
 	computed : {

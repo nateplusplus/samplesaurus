@@ -2,28 +2,28 @@ export default {
 	palette_data : [
 		{
 			key : 1,
-			classname: 'swatch1',
-			label: 'A',
+			classname : 'swatch1',
+			label : 'A',
 			hex : '#FEFEFE'
 		},
 		{
 			key : 2,
-			classname: 'swatch2',
-			label: 'B',
+			classname : 'swatch2',
+			label : 'B',
 			hex : '#FE6A04'
 		},
 		{
 			key : 3,
-			classname: 'swatch3',
-			label: 'C',
+			classname : 'swatch3',
+			label : 'C',
 			hex : '#2273CB'
 		},
 		{
 			key : 4,
-			classname: 'swatch4',
-			label: 'D',
+			classname : 'swatch4',
+			label : 'D',
 			hex : '#222222'
-		},
+		}
 	],
 	settings_data : [
 		{
