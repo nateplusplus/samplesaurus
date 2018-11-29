@@ -16,7 +16,7 @@
 
 <script>
 
-import ColorPickerModal from '@/components/ColorPickerModal.vue'
+import ColorPickerModal from '@/components/ColorPickerModal.vue';
 
 export default {
 	name : 'Swatch',
@@ -42,7 +42,7 @@ export default {
 			return ((color.replace('#', '0x')) < (0xffffff / 2));
 		}
 	}
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

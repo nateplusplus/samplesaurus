@@ -62,4 +62,4 @@ export default {
 			name : 'font_button'
 		}
 	]
-}
+};

@@ -7,10 +7,7 @@
 <script>
 export default {
 	name : 'app'
-}
+};
 </script>
 
-<style>
-@import "assets/css/style.css";
-@import "assets/css/lib/farbtastic.css";
-</style>
+<style src="./assets/css/style.css"></style>

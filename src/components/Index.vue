@@ -100,9 +100,9 @@
 
 
 <script>
-import Data from '@/Data.js'
-import Swatch from '@/components/Swatch.vue'
-import CircleDropdown from '@/components/CircleDropdown.vue'
+import Data from '@/Data.js';
+import Swatch from '@/components/Swatch.vue';
+import CircleDropdown from '@/components/CircleDropdown.vue';
 
 export default {
 	name : 'Index',
@@ -119,7 +119,7 @@ export default {
 			sidebarFocused : false,
 			windowWidth : window.innerWidth,
 			activeModal : 0
-		}
+		};
 	},
 	methods : {
 		getStyle : function(el) {
@@ -172,11 +172,11 @@ export default {
 	mounted : function() {
 		this.$nextTick(() => {
 			window.addEventListener('resize', () => {
-				this.windowWidth = window.innerWidth
+				this.windowWidth = window.innerWidth;
 			});
 		});
 	}
-}
+};
 </script>
 
 

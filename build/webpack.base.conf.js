@@ -1,7 +1,6 @@
 'use strict'
 const path = require('path')
 const utils = require('./utils')
-var webpack = require('webpack')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 
@@ -72,13 +71,7 @@ module.exports = {
 					limit: 10000,
 					name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
 				}
-			},
+			}
 		]
-	},
-	plugins : [
-		new webpack.ProvidePlugin({
-			$: 'jquery',
-			jQuery: 'jquery'
-		})
-	]
+	}
 }

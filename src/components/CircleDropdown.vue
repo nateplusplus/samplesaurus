@@ -45,7 +45,7 @@ export default {
 	data() {
 		return {
 			showDropDown : false
-		}
+		};
 	},
 	methods : {
 		select : function(selected_option) {
@@ -73,7 +73,7 @@ export default {
 			return this.getOptionByValue(this.model.value)[0];
 		}
 	}
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
