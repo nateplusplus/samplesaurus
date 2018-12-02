@@ -105,9 +105,9 @@ body {
 		font-size: 3em;
 		font-weight: 600;
 	}
-.mini-swatch {
-	width: 20px;
-	height: 20px;
+
+#mini-palette {
+	width: 100px;
 }
 
 
