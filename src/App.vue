@@ -1,6 +1,6 @@
 <template>
-	<div id="app" class="w-full p-0 min-h-full flex flex-col">
-		<router-view/>
+	<div id="app" class="w-full p-0 flex flex-col">
+		<router-view />
 	</div>
 </template>
 

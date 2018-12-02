@@ -68,24 +68,6 @@ body {
 	font-family:  futura-pt, sans-serif;
 }
 
-.ccmonstermash {
-	font-family: ccmonstermash, sans-serif;
-	letter-spacing: 1px;
-}
-
-#branding img {
-	height: 35px;
-}
-	@media screen and (min-width:400px) {
-		#branding img {
-			height: 35px;
-		}
-	}
-
-#branding h1 {
-	color: #222;
-}
-
 .swatch {
 	position: relative;
 	/* cursor: move; */
@@ -105,9 +87,9 @@ body {
 		font-size: 3em;
 		font-weight: 600;
 	}
-.mini-swatch {
-	width: 20px;
-	height: 20px;
+
+#mini-palette {
+	width: 70px;
 }
 
 
