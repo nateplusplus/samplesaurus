@@ -3,8 +3,8 @@
 		<div class="py-4">
 			<Menu :palette="palette" :showPalette="showPalette" @toggle-palette="showPalette = !showPalette" @toggle-dropdowns="showDropdowns = !showDropdowns"></Menu>
 		</div>
-		<div class="flex flex-row flex-1">
-			<div class="w-64 sm:w-48 relative" v-show="showPalette">
+		<div class="flex flex-row flex-1 overflow-x-hidden sm:overflow-x-auto">
+			<div class="flex-no-shrink w-64 sm:w-48 relative" v-show="showPalette">
 				<Sidebar :palette="palette" :settings="settings" class="shadow-md"></Sidebar>
 			</div>
 			<div class="flex-1">
