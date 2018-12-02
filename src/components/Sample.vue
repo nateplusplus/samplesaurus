@@ -1,7 +1,7 @@
 <template lang="html">
-	<div id="sample_page" class="flex flex-row w-full pb-12 pt-8 mx-auto lg:h-full" v-bind:style="getStyle('bg_page')">
-		<div class="w-full flex-initial mb-12">
-			<div class="px-12">
+	<div id="sample_page" class="flex flex-row overflow-x-hidden sm:overflow-x-auto w-full pb-12 pt-8 mx-auto lg:h-full">
+		<div class="w-screen sm:w-full flex-initial mb-12">
+			<div class="px-6 md:px-12">
 				<div v-if="showDropdowns" class="text-center w-full">
 					<CircleDropdown :model="findSettingByName('bg_page')[0]" :options="paletteOptions"></CircleDropdown>
 				</div>
@@ -66,11 +66,14 @@ export default {
 		settings : {
 			type : Array,
 			required : true
+		},
+		showDropdowns : {
+			type : Boolean,
+			required : true
 		}
 	},
 	data() {
 		return {
-			showDropdowns : false,
 			showPalette : true,
 			sidebarFocused : false,
 			windowWidth : window.innerWidth,

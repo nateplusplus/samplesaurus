@@ -28,7 +28,6 @@ export default {
 	},
 	data() {
 		return {
-			showDropdowns : false,
 			showPalette : true,
 			sidebarFocused : false,
 			windowWidth : window.innerWidth,
