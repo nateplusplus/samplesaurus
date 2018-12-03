@@ -11,6 +11,11 @@
 				<Sample :palette="palette" :settings="settings" :showDropdowns="showDropdowns"></Sample>
 			</div>
 		</div>
+		<div class="text-right pb-8 pr-4">
+			<a href="https://github.com/nateplusplus/samplesaurus" target="_blank" class="p-2 bg-grey-darkest text-grey-lighter no-underline hover:bg-grey-darker">
+				<i class="fab fa-github"></i> View on GitHub
+			</a>
+		</div>
 	</div>
 </template>
 
