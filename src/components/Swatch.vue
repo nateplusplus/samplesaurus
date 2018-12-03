@@ -1,7 +1,7 @@
 <template>
 	<div class="relative">
 		<ColorPickerModal :swatchKey="swatch.key" :activeModal="activeModal" @closeModal="$emit('closeSwatchModal')" v-model="swatch.hex"></ColorPickerModal>
-		<div class="z-100 relative">
+		<div class="z-100 relative cursor-pointer" @click="$emit('openSwatchModal')">
 			<div class="swatch" :style="{ backgroundColor : swatch.hex }" :class="[ (invertLabel(swatch.hex)) ? 'text-white' : 'text-black' ]">
 				<div class="text-center futura swatch-label">
 					{{ swatch.label }}
@@ -9,7 +9,7 @@
 				<div class="absolute flex justify-between items-center w-full pl-2 pr-1" style="bottom: 0; right:0;">
 					<div>Hex</div>
 					<div>
-						<input @click="$emit('openSwatchModal')" :id="'hex-'+swatch.key" class="text-right p-2 bg-transparent" type="text" v-model="swatch.hex" value="">
+						<input :id="'hex-'+swatch.key" class="text-right p-2 bg-transparent" type="text" v-model="swatch.hex" :class="[ (invertLabel(swatch.hex)) ? 'text-white' : 'text-black' ]">
 					</div>
 				</div>
 			</div>

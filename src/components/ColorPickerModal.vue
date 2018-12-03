@@ -4,7 +4,7 @@
 			class="color-picker-tooltip absolute shadow-md rounded-full" role="modal">
 		<div class="p-2 text-right">
 			<div class="inline-block">
-				<color-picker v-model="modalColor" :width="100" :height="100"></color-picker>
+				<color-picker v-model="modalColor" :width="108" :height="108"></color-picker>
 			</div>
 		</div>
 	</div>
