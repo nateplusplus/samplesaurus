@@ -1,16 +1,10 @@
 <template>
 
-	<div 
-	v-show="isActive"
-	class="color-picker-tooltip absolute bg-teal-lightest border-t-4 border-teal rounded-b text-teal-darkest shadow-md z-10" role="modal">
-		<div>
-			<div @click="$emit('closeModal')" class="text-right p-2">
-				<i class="fas fa-times fa-fw cursor-pointer"></i>
-			</div>
-			<div class="tooltip-body p-6">
-				<div class="mb-8">
-					<color-picker v-model="modalColor"></color-picker>
-				</div>
+	<div v-show="isActive"
+			class="color-picker-tooltip absolute shadow-md rounded-full" role="modal">
+		<div class="p-2 text-right">
+			<div class="inline-block">
+				<color-picker v-model="modalColor" :width="100" :height="100"></color-picker>
 			</div>
 		</div>
 	</div>
@@ -62,8 +56,9 @@ export default {
 
 <style>
 	.color-picker-tooltip {
-		height: auto;
-		min-height: 200%;
-		min-width:220px;
+		top: 0;
+		left: 0;
+		width: 200%;
+		background-color: rgba(100,100,100,0.8);
 	}
 </style>
