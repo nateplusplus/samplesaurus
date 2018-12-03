@@ -1,21 +1,30 @@
 <template>
-	<div class="align-middle text-black text-base items-center inline-block" @mouseleave="showDropDown=false">
-		<div @mouseover="showDropDown=true" @click.prevent="showDropDown=!showDropDown" :style="{ backgroundColor: selectedOption.data.hex }" :class="getLabelClass(selectedOption.data.hex)" class="color-circle color-circle-30 inline-block border">
-			<div class="text-lg text-center">{{ selectedOption.label }}</div>
+	<div class="align-middle text-black text-base items-center inline-block relative" @mouseleave="showDropDown=false">
+		<div @mouseover="showDropDown=true" @click.prevent="showDropDown=!showDropDown" :style="{ backgroundColor: selectedOption.data.hex }" :class="getLabelClass(selectedOption.data.hex)" class="color-circle color-circle-30 inline-block z-10">
+			<div class="flex items-center justify-center">
+				<div class="text-center circle-dropdown-label">
+					{{ selectedOption.label }}
+				</div>
+			</div>
 		</div>
-		<div class="flex items-center absolute circle-menu w-auto" :class=" (isVertical) ? 'menu-vertical' : 'menu-horizontal ml-6' ">
-			<transition name="fade">
-				<i v-show="showDropDown" class="fa fa-fw" :class="[ isVertical ? 'fa-caret-down' : 'fa-caret-right' ]"></i>
-			</transition>
-			<transition :name="(isVertical) ? 'slide-fade-down' : 'slide-fade-right'">
-				<div v-show="showDropDown" class="flex items-center dropdown-option">
+		<div class="flex items-center absolute circle-menu w-auto" :class=" (isVertical) ? 'menu-vertical' : 'menu-horizontal' ">
+			<transition :name="(isVertical) ? 'fade' : 'fade'">
+				<div v-show="showDropDown" class="flex items-center dropdown-option bg-grey-light p-1 rounded-full">
+					<div class="color-circle color-circle-15 ml-1"></div>
 					<div v-for="option in options">
 						<div
+							v-show="showDropDown"
 							@click.prevent="select(option)"
 							:style="{ backgroundColor: option.data.hex }"
-							class="color-circle color-circle-15 ml-2 border"
+							class="color-circle color-circle-15"
 							:class="[ option.value == model.value ? 'circle-selected' : '', getLabelClass(option.data.hex) ]">
-							<div class="text-lg text-center">{{ option.label }}</div>
+
+							<div class="flex items-center justify-center">
+								<div class="text-center circle-dropdown-label">
+									{{ option.label }}
+								</div>
+							</div>
+
 						</div>
 					</div>
 				</div>
