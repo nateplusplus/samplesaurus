@@ -1,16 +1,19 @@
 <template>
 	<div class="relative">
-		<div>
+		<ColorPickerModal :swatchKey="swatch.key" :activeModal="activeModal" @closeModal="$emit('closeSwatchModal')" v-model="swatch.hex"></ColorPickerModal>
+		<div class="z-100 relative cursor-pointer" @click="$emit('openSwatchModal')">
 			<div class="swatch" :style="{ backgroundColor : swatch.hex }" :class="[ (invertLabel(swatch.hex)) ? 'text-white' : 'text-black' ]">
 				<div class="text-center futura swatch-label">
 					{{ swatch.label }}
 				</div>
-			</div>
-			<div class="text-center">
-				<input @click="$emit('openSwatchModal')" :id="'hex-'+swatch.key" class="colorwell border border-t-0 border-l-0 border-r-0 text-center w-full p-2" type="text" v-model="swatch.hex" value="">
+				<div class="absolute flex justify-between items-center w-full pl-2 pr-1" style="bottom: 0; right:0;">
+					<div>Hex</div>
+					<div>
+						<input :id="'hex-'+swatch.key" class="text-right p-2 bg-transparent" type="text" v-model="swatch.hex" :class="[ (invertLabel(swatch.hex)) ? 'text-white' : 'text-black' ]">
+					</div>
+				</div>
 			</div>
 		</div>
-		<ColorPickerModal :swatchKey="swatch.key" :activeModal="activeModal" @closeModal="$emit('closeSwatchModal')" v-model="swatch.hex"></ColorPickerModal>
 	</div>
 </template>
 
@@ -47,4 +50,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.swatch input {
+	width: 5em;
+}
 </style>

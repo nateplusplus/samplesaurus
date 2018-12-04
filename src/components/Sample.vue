@@ -6,8 +6,8 @@
 					<CircleDropdown :model="findSettingByName('bg_page')[0]" :options="paletteOptions"></CircleDropdown>
 				</div>
 				<header class="mb-4" v-bind:style="getStyle('font_h')">
-					<h1>Sample Heading <CircleDropdown v-if="showDropdowns" :model="findSettingByName('font_h')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></CircleDropdown></h1>
-					<h2>Sample Subheading</h2>
+					<h1>Welcome to Samplesaurus! <CircleDropdown v-if="showDropdowns" :model="findSettingByName('font_h')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></CircleDropdown></h1>
+					<h2>Quickly sample color palettes on a UI template.</h2>
 				</header>
 
 				<article class="my-4" v-bind:style="getStyle('font_p')">
@@ -15,16 +15,19 @@
 						<div class="float-right">
 							<CircleDropdown v-if="showDropdowns" :model="findSettingByName('font_p')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></CircleDropdown>
 						</div>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor <a v-bind:style="getStyle('font_a')" href="#">incididunt</a> <CircleDropdown v-if="showDropdowns" :model="findSettingByName('font_a')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></CircleDropdown> ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse <a v-bind:style="getStyle('font_a')" href="#"> cillum dolore eu fugiat</a> nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						As a developer who's quickly prototyping designs, sometimes it's hard to imagine how a color scheme might work on an actual page. I might find some colors that look great together, but which one works best as a background? Which one is best as a text color? Will they conflict once they're actually put to use? This site was developed as a fun tool to sample color palettes on a web interface. Choose the colors you're interested in, and then <a v-bind:style="getStyle('font_a')" href="#">assign</a> <CircleDropdown v-if="showDropdowns" :model="findSettingByName('font_a')[0]" :options="paletteOptions" :settings="{ axis: 'y' }"></CircleDropdown> those colors to various parts of this page.
 					</p>
-					<ul class="my-4" v-bind:style="getStyle('font_li')">
-						<li>List item 1 <CircleDropdown v-if="showDropdowns" :model="findSettingByName('font_li')[0]" :options="paletteOptions"></CircleDropdown></li>
-						<li>List item 2</li>
-						<li>List item 3</li>
-						<li>List item 4</li>
-					</ul>
 					<p class="my-4">
-						Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						<strong>My goal is to make it as easy as possible for you.</strong>
+					</p>
+					<ol class="my-4" v-bind:style="getStyle('font_li')">
+						<li>Click the small color palette in the upper left to choose your color scheme <CircleDropdown v-if="showDropdowns" :model="findSettingByName('font_li')[0]" :options="paletteOptions"></CircleDropdown></li>
+						<li>As colors are changed, this template will immediately update</li>
+						<li>Click the small circle in the upper right to show dropdowns throughout this page</li>
+						<li>Use those dropdowns to re-assign each color to specific UI elements</li>
+					</ol>
+					<p class="my-4">
+						I hope this site is useful to you. I'm developing it completely open source, and you can feel free to check it out on <a href="https://github.com/nateplusplus/samplesaurus" target="_blank" v-bind:style="getStyle('font_a')">Github</a>! This was started as an exercise in Vue.js and I hope to continue building on it further. If you have any feedback, questions, comments, feel free to submit an issue on the repository. You can also send me an email through my personal website: <a href="http://www.natehub.net" target="_blank" v-bind:style="getStyle('font_a')">natehub.net</a>.
 					</p>
 					<p class="my-4">
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

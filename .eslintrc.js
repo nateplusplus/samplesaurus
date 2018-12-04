@@ -29,6 +29,8 @@ module.exports = {
 				"no-undef" : process.env.NODE_ENV === "production" ? 2 : 1,
 				"camelcase" : "off",
 				"no-multiple-empty-lines" : "off",
-				"no-trailing-spaces" : "warn"
+				"no-trailing-spaces" : "warn",
+				"quotes" : "off",
+				"padded-blocks" : "off"
 		}
 }

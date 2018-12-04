@@ -3,7 +3,7 @@
 		<div
 			v-for="swatch in palette" 
 			:key="swatch.key">
-			<swatch :swatch="swatch" :activeModal="activeModal" @openSwatchModal="activeModal = swatch.key" @closeSwatchModal="closeModals(swatch.key)"></swatch>
+			<swatch :swatch="swatch" :activeModal="activeModal" @openSwatchModal="toggleModal(swatch.key)" @closeSwatchModal="closeModals(swatch.key)"></swatch>
 		</div>
 	</div>
 </template>
@@ -35,6 +35,14 @@ export default {
 		};
 	},
 	methods : {
+		toggleModal : function(swatchKey) {
+			if (swatchKey === this.activeModal) {
+				this.activeModal = 0;
+			}
+			else {
+				this.activeModal = swatchKey;
+			}
+		},
 		closeModals : function(swatchKey) {
 			if (swatchKey === this.activeModal) {
 				this.activeModal = 0;

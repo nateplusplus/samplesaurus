@@ -1,29 +1,26 @@
 <template>
-
-	<div 
-	v-show="isActive"
-	class="color-picker-tooltip absolute bg-teal-lightest border-t-4 border-teal rounded-b text-teal-darkest shadow-md z-10" role="modal">
-		<div>
-			<div @click="$emit('closeModal')" class="text-right p-2">
-				<i class="fas fa-times fa-fw cursor-pointer"></i>
-			</div>
-			<div class="tooltip-body p-6">
-				<div class="mb-8">
-					<color-picker v-model="modalColor"></color-picker>
+	<Transition name="slide-open-right">
+		<div v-show="isActive"
+				class="color-picker-tooltip absolute shadow-md rounded-full" role="modal">
+			<div class="p-2 text-right">
+				<div class="inline-block">
+						<ColorSliders :model="hsl" @change="setModalColor" />
 				</div>
 			</div>
 		</div>
-	</div>
+	</Transition>
 
 </template>
 <script>
 
-import ColorPicker from 'vue-color-picker-wheel';
+// import ColorPicker from 'vue-color-picker-wheel';
+import ColorSliders from '@/components/colorsliders';
+var convert = require('color-convert');
 
 export default {
 	name : 'ColorPickerModal',
 	components : {
-		ColorPicker
+		ColorSliders
 	},
 	props : {
 		activeModal : {
@@ -48,22 +45,43 @@ export default {
 			// Only open the current swatch's modal
 			return (this.activeModal === this.swatchKey);
 		},
-		modalColor : {
-			get : function() {
-				return this.color;
-			},
-			set : function(value) {
-				this.$emit('colorchange', value);
-			}
+		hsl : function() {
+
+			var hsl = convert.hex.hsl(this.color);
+
+			return {
+				h : hsl[0],
+				s : hsl[1],
+				l : hsl[2]
+			};
+		}
+	},
+	methods : {
+		setModalColor : function(event) {
+
+			// Convert hsl to hex
+			var hex = '#' + convert.hsl.hex(event.h, event.s, event.l);
+
+			// Set color
+			this.$emit('colorchange', hex);
 		}
 	}
 };
 </script>
 
-<style>
+<style scoped>
 	.color-picker-tooltip {
-		height: auto;
-		min-height: 200%;
-		min-width:220px;
+		top: 0;
+		left: 0;
+		width: 230%;
+		background-color: rgba(100,100,110,0.7);
+		margin-top: 6%;
+	}
+
+	@media screen and (min-width: 576px) {
+		.color-picker-tooltip {
+			width: 185%;
+			margin-top: 22%;
+		}
 	}
 </style>
