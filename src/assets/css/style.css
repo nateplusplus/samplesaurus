@@ -218,6 +218,23 @@ body {
 }
 
 
+/* SLIDE-OPEN-RIGHT */
+.slide-open-right-enter-active {
+	transition: all .3s ease;
+}
+.slide-open-right-leave-active {
+	transition: all .2s ease;
+}
+.slide-open-right-enter {
+	transform: translateX(-150px) scaleX(0.8);
+	opacity: 0;
+}
+.slide-open-right-leave-to {
+	transform: translateX(-150px) scaleX(0.8);
+	opacity: 0; 
+}
+
+
 .sidebar-arrow {
 	right: 50%;
 	bottom: 0;

@@ -4,9 +4,11 @@
 			<Menu :palette="palette" :showPalette="showPalette" @toggle-palette="showPalette = !showPalette" @toggle-dropdowns="showDropdowns = !showDropdowns"></Menu>
 		</div>
 		<div class="flex flex-row flex-1 overflow-x-hidden sm:overflow-x-auto">
-			<div class="flex-no-shrink w-32 sm:w-48 relative" v-show="showPalette">
-				<Sidebar :palette="palette" :settings="settings" class="shadow-md"></Sidebar>
-			</div>
+			<Transition name="slide-open-right">
+				<div class="flex-no-shrink w-32 sm:w-48 relative z-10" v-show="showPalette">
+					<Sidebar :palette="palette" :settings="settings" class="shadow-md"></Sidebar>
+				</div>
+			</Transition>
 			<div class="flex-1">
 				<Sample :palette="palette" :settings="settings" :showDropdowns="showDropdowns"></Sample>
 			</div>

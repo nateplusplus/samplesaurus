@@ -1,12 +1,12 @@
 <template lang="html">
-	<div class="">
-		<div class="control" v-bind:style="gradientH">
+	<div class="color-sliders">
+		<div class="color-sliders__control rounded-full m-2 border border-grey-darker" v-bind:style="gradientH">
 			<input type="range" min="0" max="360" v-model="h" />
 		</div>
-		<div class="control" v-bind:style="gradientS">
+		<div class="color-sliders__control rounded-full m-2 border border-grey-darker" v-bind:style="gradientS">
 			<input type="range" min="0" max="100" v-model="s" />
 		</div>
-		<div class="control" v-bind:style="gradientL">
+		<div class="color-sliders__control rounded-full m-2 border border-grey-darker" v-bind:style="gradientL">
 			<input type="range" min="0" max="100" v-model="l" />
 		</div>
 	</div>
@@ -16,19 +16,16 @@
 
 function hsb2hsl(h, s, b) {
 	var hsl = {
-		h : h
+		h : h,
+		s : (s * b),
+		l : b
 	};
-	// hsl.l = (2 - s) * b;
-	hsl.l = s * b;
-	hsl.s = s * b;
 
 	if (hsl.l <= 1 && hsl.l > 0) {
 		hsl.s /= hsl.l;
 	} else {
 		hsl.s /= 2 - hsl.l;
 	}
-
-	// hsl.l /= 2;
 
 	if (hsl.s > 1) {
 		hsl.s = 1;
@@ -58,10 +55,6 @@ export default {
 				}
 			}
 		}
-	},
-	model : {
-		prop : 'model',
-		event : 'change'
 	},
 	data : function() {
 		return {
@@ -117,7 +110,7 @@ export default {
 			c = hsl.h + ", " + hsl.s + "%, " + hsl.l + "%";
 			stops.push("hsl(" + c + ")");
 
-			hsl = hsb2hsl(parseFloat(this.h / 360), parseFloat(this.s / 100), 1);
+			hsl = hsb2hsl(parseFloat(this.h / 360), 1, 1);
 
 			c = hsl.h + ", " + hsl.s + "%, " + hsl.l + "%";
 			stops.push("hsl(" + c + ")");
@@ -136,5 +129,51 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
+
+	/* https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/ */
+
+	input[type=range] {
+		-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+		width: 100%; /* Specific width is required for Firefox. */
+		background: transparent; /* Otherwise white in Chrome */
+	}
+
+	input[type=range]:focus {
+		outline: none;
+	}
+
+	input[type=range]::-ms-track {
+		width: 100%;
+		cursor: pointer;
+
+		/* Hides the slider so custom styles can be added */
+		background: transparent; 
+		border-color: transparent;
+		color: transparent;
+	}
+
+
+	input[type=range]::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		border: 1px solid rgba(0,80,20,0.5);
+		border-radius: 50%;
+		background-color: rgba(255,255,255,0.5);
+		width: 20px;
+		height: 20px;
+		cursor: pointer;
+	}
+	input[type=range]::-moz-range-thumb {
+		width: 20px;
+		height: 20px;
+	}
+	input[type=range]::-ms-thumb {
+		width: 20px;
+		height: 20px;
+	}
+
+	.color-sliders__control {
+		line-height: 0;
+	}
+
 </style>

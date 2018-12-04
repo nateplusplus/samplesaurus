@@ -1,13 +1,14 @@
 <template>
-
-	<div v-show="isActive"
-			class="color-picker-tooltip absolute shadow-md rounded-full" role="modal">
-		<div class="p-2 text-right">
-			<div class="inline-block">
-				<ColorSliders v-model="hsl" @change="setModalColor" />
+	<Transition name="slide-open-right">
+		<div v-show="isActive"
+				class="color-picker-tooltip absolute shadow-md rounded-full" role="modal">
+			<div class="p-2 text-right">
+				<div class="inline-block">
+						<ColorSliders :model="hsl" @change="setModalColor" />
+				</div>
 			</div>
 		</div>
-	</div>
+	</Transition>
 
 </template>
 <script>
@@ -68,11 +69,19 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 	.color-picker-tooltip {
 		top: 0;
 		left: 0;
-		width: 200%;
-		background-color: rgba(100,100,100,0.8);
+		width: 230%;
+		background-color: rgba(100,100,110,0.7);
+		margin-top: 6%;
+	}
+
+	@media screen and (min-width: 576px) {
+		.color-picker-tooltip {
+			width: 185%;
+			margin-top: 22%;
+		}
 	}
 </style>
