@@ -52,7 +52,7 @@ export default {
 					h : 265,
 					s : 80,
 					l : 99
-				}
+				};
 			}
 		}
 	},
@@ -61,11 +61,11 @@ export default {
 			h : this.model.h,
 			s : this.model.s,
 			l : this.model.l
-		}
+		};
 	},
 	computed : {
 		hsl : function() {
-			var hsl = { h : parseFloat(this.h), s : parseFloat(this.s), l : parseFloat(this.l) }
+			var hsl = { h : parseFloat(this.h), s : parseFloat(this.s), l : parseFloat(this.l) };
 			return hsl;
 		},
 		colorString : function() {
@@ -77,15 +77,15 @@ export default {
 			for (var i = 0; i < 7; i++) {
 				var h = i * 60;
 
-				var hsl = hsb2hsl(parseFloat(h / 360), parseFloat(this.s) / 100, parseFloat(this.l / 100))
+				var hsl = hsb2hsl(parseFloat(h / 360), parseFloat(this.s) / 100, parseFloat(this.l / 100));
 
-				var c = hsl.h + ", " + hsl.s + "%, " + hsl.l + "%"
-				stops.push("hsl(" + c + ")")
+				var c = hsl.h + ", " + hsl.s + "%, " + hsl.l + "%";
+				stops.push("hsl(" + c + ")");
 			}
 
 			return {
 				backgroundImage : "linear-gradient(to right, " + stops.join(', ') + ")"
-			}
+			};
 		},
 		gradientS : function() {
 			var stops = [];
@@ -100,7 +100,7 @@ export default {
 
 			return {
 				backgroundImage : "linear-gradient(to right, " + stops.join(', ') + ")"
-			}
+			};
 		},
 		gradientL : function() {
 			var stops = [];
@@ -117,7 +117,7 @@ export default {
 
 			return {
 				backgroundImage : "linear-gradient(to right, " + stops.join(', ') + ")"
-			}
+			};
 		}
 	},
 	watch : {
@@ -126,7 +126,7 @@ export default {
 			this.$emit('change', this.hsl);
 		}
 	}
-}
+};
 </script>
 
 <style lang="css" scoped>
