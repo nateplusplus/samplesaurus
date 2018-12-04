@@ -4,7 +4,7 @@
 			class="color-picker-tooltip absolute shadow-md rounded-full" role="modal">
 		<div class="p-2 text-right">
 			<div class="inline-block">
-				<ColorSliders v-model="hsl" @change="setModalColor" />
+				<color-picker v-model="modalColor" :width="108" :height="108"></color-picker>
 			</div>
 		</div>
 	</div>
@@ -12,14 +12,12 @@
 </template>
 <script>
 
-// import ColorPicker from 'vue-color-picker-wheel';
-import ColorSliders from '@/components/colorsliders';
-var convert = require('color-convert');
+import ColorPicker from 'vue-color-picker-wheel';
 
 export default {
 	name : 'ColorPickerModal',
 	components : {
-		ColorSliders
+		ColorPicker
 	},
 	props : {
 		activeModal : {
@@ -44,25 +42,13 @@ export default {
 			// Only open the current swatch's modal
 			return (this.activeModal === this.swatchKey);
 		},
-		hsl : function() {
-
-			var hsl = convert.hex.hsl(this.color);
-
-			return {
-				h : hsl[0],
-				s : hsl[1],
-				l : hsl[2]
-			};
-		}
-	},
-	methods : {
-		setModalColor : function(event) {
-
-			// Convert hsl to hex
-			var hex = '#' + convert.hsl.hex(event.h, event.s, event.l);
-
-			// Set color
-			this.$emit('colorchange', hex);
+		modalColor : {
+			get : function() {
+				return this.color;
+			},
+			set : function(value) {
+				this.$emit('colorchange', value);
+			}
 		}
 	}
 };
