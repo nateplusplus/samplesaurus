@@ -1,7 +1,12 @@
 <template>
 	<div class="w-full h-full flex flex-col" v-bind:style="getStyle('bg_page')">
 		<div class="py-4">
-			<Menu :palette="palette" :showPalette="showPalette" @toggle-palette="showPalette = !showPalette" @toggle-dropdowns="showDropdowns = !showDropdowns"></Menu>
+			<Menu
+				:palette="palette"
+				:showPalette="showPalette"
+				:showDropdowns=showDropdowns
+				@toggle-palette="showPalette = !showPalette"
+				@toggle-dropdowns="showDropdowns = !showDropdowns"></Menu>
 		</div>
 		<div class="flex flex-row flex-1 overflow-x-hidden sm:overflow-x-auto">
 			<Transition name="slide-open-right">

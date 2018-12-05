@@ -2,7 +2,7 @@
 	<div class="">
 		<div
 			v-for="swatch in palette" 
-			:key="swatch.key">
+			:key="'miniswatch-'+swatch.key">
 			<swatch :swatch="swatch" :activeModal="activeModal" @openSwatchModal="toggleModal(swatch.key)" @closeSwatchModal="closeModals(swatch.key)"></swatch>
 		</div>
 	</div>

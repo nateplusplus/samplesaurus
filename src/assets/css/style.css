@@ -249,3 +249,8 @@ body {
 		bottom: initial;
 	}
 }
+
+#topnav button:active,
+#topnav button:focus {
+	outline: none;
+}
