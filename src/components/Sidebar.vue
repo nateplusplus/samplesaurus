@@ -52,5 +52,9 @@ export default {
 };
 </script>
 
-<style lang="css">
+<style>
+#topnav button:active,
+#topnav button:focus {
+	outline: none;
+}
 </style>

@@ -85,6 +85,60 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.circle-menu.menu-vertical {
+	flex-direction: column;
+	margin-left: -0.2em;
+	margin-top: -0.3em;
+	z-index: 1;
+	top: 0px;
+}
+	.menu-horizontal {
+		margin-top: -1.7em !important;
+		margin-left: -0.3em !important;
+	}
+	.menu-vertical .dropdown-option {
+		flex-direction: column;
+		justify-items: center;
+	}
+	.menu-vertical .dropdown-option .color-circle {
+		margin-left: 0;
+		margin-top: 0.25em;
+	}
+	.menu-horizontal .dropdown-option .color-circle {
+		margin-top: 0;
+		margin-left: 0.25em;
+	}
+	.color-circle {
+		position: relative;
+		border-radius:50%;
+		width: 1.2em;
+		box-sizing: border-box;
+		cursor: pointer;
+	}
+		.circle-menu .circle-selected {
+			border: 2px solid red;
+		}
+		.circle-menu .color-circle:hover {
+			opacity: .7;
+			cursor: pointer;
+		}
+	.color-circle:before {
+		content: '';
+		padding-top: 100%;
+		display: block;
+	}
+	.color-circle > * {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+	.circle-dropdown-label {
+		font-size: .9em;
+	}
+	.dropdown-option {
+		transition: all .3s ease;
+	}
 </style>

@@ -40,4 +40,7 @@ export default {
 </script>
 
 <style lang="css">
+#mini-palette {
+	width: 70px;
+}
 </style>

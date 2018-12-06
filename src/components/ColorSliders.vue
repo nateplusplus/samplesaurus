@@ -153,6 +153,10 @@ export default {
 		color: transparent;
 	}
 
+	input[type="range"]::-moz-range-track {
+		background-color: transparent;
+	}
+
 
 	input[type=range]::-webkit-slider-thumb {
 		-webkit-appearance: none;
@@ -164,12 +168,21 @@ export default {
 		cursor: pointer;
 	}
 	input[type=range]::-moz-range-thumb {
+		-moz-appearance: none !important;
+		border: 1px solid rgba(0,80,20,0.5);
+		border-radius: 50%;
+		background-color: rgba(255,255,255,0.5);
 		width: 20px;
 		height: 20px;
+		cursor: pointer;
 	}
 	input[type=range]::-ms-thumb {
 		width: 20px;
 		height: 20px;
+	}
+
+	.color-sliders {
+		width: 150px;
 	}
 
 	.color-sliders__control {

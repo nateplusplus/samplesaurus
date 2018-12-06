@@ -49,8 +49,27 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.swatch input {
-	width: 5em;
+<style>
+.swatch {
+	position: relative;
+	/* cursor: move; */
 }
+	.swatch:before {
+		content: '';
+		padding-top: 100%;
+		display: block;
+	}
+	.swatch-label {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		padding-top: calc(50% - 0.6em);
+		font-size: 3em;
+		font-weight: 600;
+	}
+	.swatch input {
+		width: 5em;
+	}
 </style>
